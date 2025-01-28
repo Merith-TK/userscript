@@ -22,6 +22,13 @@
         if (adElement2) {
             adElement2.remove();
         }
+
+        const adElement3 = document.querySelector('.primisPlayerContainerDiv');
+        if (adElement3) {
+            adElement3.remove();
+        }
+
+
     };
 
     // Run the ad removal function after the page loads
