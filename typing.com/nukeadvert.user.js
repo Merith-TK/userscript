@@ -28,6 +28,10 @@
             adElement3.remove();
         }
 
+        const adElement4 = document.querySelector('.primis_container_div');
+        if (adElement4) {
+            adElement4.remove();
+        }
 
     };
 
