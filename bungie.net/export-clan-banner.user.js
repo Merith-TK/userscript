@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Destiny 2 Clan Banner Extractor (Auto Crop + Solid Color + ZIP with All Variants)
 // @namespace    http://tampermonkey.net/
-// @version      7.0
+// @version      8.0
 // @description  Download Destiny 2 Clan Banner with auto-crop, solid color background, and all variants in ZIP (masked/unmasked, combined/individual).
 // @author       ChatGPT
 // @match        https://www.bungie.net/en/ClanV2/bannercreator?groupid=*
@@ -18,10 +18,13 @@
         'flagdetail',
         'emblembg',
         'emblemfg',
-        'bannerMasked'
+        'bannerMasked',
+        'staff' // Added pole as a separate layer
     ];
+    const solidBackgroundColor = 'white'; // change this color as needed (e.g., 'white', 'blue', '#ff5733')
 
-    const cropArea = { x: 48, y: 40, width: 400, height: 600 }; // Default crop area based on previous input
+    const cropArea = { x: 48, y: 40, width: 400, height: 600 }; // Default crop area for most layers
+    const finalCropArea = { x: 40, y: 40, width: 410, height: 800 }; // Different crop area for the final layer
 
     // Function to create a merged banner with cropped content
     function createMergedBanner() {
@@ -29,6 +32,10 @@
         mergedCanvas.width = 496;
         mergedCanvas.height = 1034;
         const ctx = mergedCanvas.getContext('2d');
+
+        // Replace wavy background with solid color
+        // ctx.fillStyle = solidBackgroundColor;
+        // ctx.fillRect(0, 0, mergedCanvas.width, mergedCanvas.height); // Fill with solid color
 
         // Draw the layers (excluding background effect layers like flagdetail)
         canvasIdsInOrder.forEach(id => {
@@ -43,16 +50,16 @@
         return cropCanvas(mergedCanvas);
     }
 
-    // Function to crop canvas to detect banner content
-    function cropCanvas(sourceCanvas) {
+    // Function to crop canvas to a specific area
+    function cropCanvas(sourceCanvas, cropSettings = cropArea) {
         const croppedCanvas = document.createElement('canvas');
-        croppedCanvas.width = cropArea.width;
-        croppedCanvas.height = cropArea.height;
+        croppedCanvas.width = cropSettings.width;
+        croppedCanvas.height = cropSettings.height;
         const ctx = croppedCanvas.getContext('2d');
         ctx.drawImage(
             sourceCanvas,
-            cropArea.x, cropArea.y, cropArea.width, cropArea.height, // source crop
-            0, 0, cropArea.width, cropArea.height // destination
+            cropSettings.x, cropSettings.y, cropSettings.width, cropSettings.height, // source crop
+            0, 0, cropSettings.width, cropSettings.height // destination
         );
         return croppedCanvas;
     }
@@ -115,7 +122,8 @@
     async function downloadLayersAsZip() {
         const zip = new JSZip();
 
-        for (const id of [...canvasIdsInOrder, 'final']) {
+        // Add each layer (including the pole) with appropriate crop
+        for (const id of [...canvasIdsInOrder]) {
             const layer = document.getElementById(id);
             if (layer) {
                 const cropped = cropCanvas(layer);
@@ -125,6 +133,27 @@
                 console.warn(`⚠️ Layer ${id} not found`);
             }
         }
+
+        // Add the final layer with offset crop
+        const finalCanvas = document.createElement('canvas');
+        finalCanvas.width = 496;
+        finalCanvas.height = 1034;
+        const finalCtx = finalCanvas.getContext('2d');
+
+        // Draw all layers
+        canvasIdsInOrder.forEach(id => {
+            const layer = document.getElementById(id);
+            if (layer) {
+                finalCtx.drawImage(layer, 0, 0);
+            } else {
+                console.warn(`⚠️ Layer ${id} not found`);
+            }
+        });
+
+        // Crop the final image with the final crop area
+        const finalCroppedCanvas = cropCanvas(finalCanvas, finalCropArea);
+        const finalBlob = await new Promise(resolve => finalCroppedCanvas.toBlob(resolve, 'image/png'));
+        zip.file('final.png', finalBlob);
 
         // Add combined images
         const mergedUnmasked = createMergedBanner();
@@ -142,6 +171,15 @@
             a.click();
             console.log("✅ Downloaded: clan_banner_all_variants.zip");
         });
+    }
+
+    // Function to show preview of the merged banner
+    function showPreview() {
+        const mergedCanvas = createMergedBanner();
+        const previewWindow = window.open('', '', 'width=520,height=1040');
+        const img = new Image();
+        img.src = mergedCanvas.toDataURL('image/png');
+        previewWindow.document.body.appendChild(img);
     }
 
     // Add buttons to the page
@@ -165,9 +203,10 @@
 
     window.addEventListener('load', () => {
         setTimeout(() => {
+            addButton('🖼️ Preview Banner', showPreview, 20);
             addButton('🗜️ Download All Variants (ZIP)', () => {
                 downloadLayersAsZip();
-            }, 20);
+            }, 80);
         }, 1000);
     });
 })();
