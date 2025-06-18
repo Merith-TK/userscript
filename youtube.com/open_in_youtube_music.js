@@ -7,6 +7,7 @@
 // @match        https://www.youtube.com/*
 // @grant        none
 // @license      MIT
+// @icon         https://music.youtube.com/favicon.ico
 // @homepage     https://openuserjs.org/scripts/Merith-TK/Open_in_YouTube_Music
 // @esversion    6
 // ==/UserScript==
