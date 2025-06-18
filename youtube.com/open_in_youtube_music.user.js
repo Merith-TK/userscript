@@ -8,7 +8,7 @@
 // @supportURL   https://github.com/Merith-TK/UserScripts/issues
 // @license      MIT
 // @match        https://www.youtube.com/*
-// @version      1.4.0
+// @version      1.4.1
 // ==/UserScript==
 
 (function() {
