@@ -1,12 +1,14 @@
 // ==UserScript==
-// @name         Destiny 2 Clan Banner Extractor (Auto Crop + Solid Color + ZIP with All Variants)
-// @namespace    http://tampermonkey.net/
-// @version      8.0
-// @description  Download Destiny 2 Clan Banner Layers or Full Render.
-// @author       ChatGPT
-// @match        https://www.bungie.net/en/ClanV2/bannercreator?groupid=*
+// @name         Destiny 2 Clan Banner Extractor
+// @description  Download Destiny 2 Clan Banner Layers (Auto Crop + ZIP Export)
 // @icon         https://www.bungie.net/favicon-32x32.png
-// @grant        none
+// @author       Merith-TK
+// @namespace    https://github.com/Merith-TK
+// @homepage     https://github.com/Merith-TK/UserScripts
+// @supportURL   https://github.com/Merith-TK/UserScripts/issues
+// @license      MIT
+// @match        https://www.bungie.net/en/ClanV2/bannercreator?groupid=*
+// @version      8.0.0
 // @require      https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js
 // ==/UserScript==
 

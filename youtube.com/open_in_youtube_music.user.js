@@ -1,15 +1,14 @@
 // ==UserScript==
-// @name         Open in YouTube Music
-// @namespace    https://github.com/Merith-TK/
-// @version      1.4
-// @description  Adds a button to YouTube to open the current video in YouTube Music
-// @author       Merith-TK
-// @match        https://www.youtube.com/*
-// @grant        none
-// @license      MIT
+// @name         YouTube Music Redirect
+// @description  Adds a button to open YouTube videos in YouTube Music
 // @icon         https://music.youtube.com/favicon.ico
-// @homepage     https://openuserjs.org/scripts/Merith-TK/Open_in_YouTube_Music
-// @esversion    6
+// @author       Merith-TK
+// @namespace    https://github.com/Merith-TK
+// @homepage     https://github.com/Merith-TK/UserScripts
+// @supportURL   https://github.com/Merith-TK/UserScripts/issues
+// @license      MIT
+// @match        https://www.youtube.com/*
+// @version      1.4.0
 // ==/UserScript==
 
 (function() {

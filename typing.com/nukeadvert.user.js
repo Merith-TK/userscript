@@ -1,12 +1,14 @@
 // ==UserScript==
-// @name        Typing.com Remove Adverts
-// @namespace   Violentmonkey Scripts
-// @match       https://www.typing.com/*
-// @grant       none
-// @version     1.0
-// @author      merith@merith.xyz
-// @icon        https://typing.com/dist/shared/images/favicons/typing/favicon-32x32.png
-// @description 1/28/2025, 9:24:16 AM
+// @name         Typing.com Ad Remover
+// @description  Removes ads and tracking elements from Typing.com
+// @icon         https://typing.com/dist/shared/images/favicons/typing/favicon-32x32.png
+// @author       Merith-TK
+// @namespace    https://github.com/Merith-TK
+// @homepage     https://github.com/Merith-TK/UserScripts
+// @supportURL   https://github.com/Merith-TK/UserScripts/issues
+// @license      MIT
+// @match        https://www.typing.com/*
+// @version      1.0.0
 // ==/UserScript==
 
 (function () {
