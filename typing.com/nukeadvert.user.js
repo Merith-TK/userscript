@@ -5,6 +5,7 @@
 // @grant       none
 // @version     1.0
 // @author      merith@merith.xyz
+// @icon        https://typing.com/dist/shared/images/favicons/typing/favicon-32x32.png
 // @description 1/28/2025, 9:24:16 AM
 // ==/UserScript==
 

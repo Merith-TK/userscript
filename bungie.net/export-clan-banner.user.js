@@ -2,7 +2,7 @@
 // @name         Destiny 2 Clan Banner Extractor (Auto Crop + Solid Color + ZIP with All Variants)
 // @namespace    http://tampermonkey.net/
 // @version      8.0
-// @description  Download Destiny 2 Clan Banner with auto-crop, solid color background, and all variants in ZIP (masked/unmasked, combined/individual).
+// @description  Download Destiny 2 Clan Banner Layers or Full Render.
 // @author       ChatGPT
 // @match        https://www.bungie.net/en/ClanV2/bannercreator?groupid=*
 // @icon         https://www.bungie.net/favicon-32x32.png
