@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         YouTube Music Redirect
+// @name         Open in Youtube Music
 // @description  Adds a button to open YouTube videos in YouTube Music
 // @icon         https://music.youtube.com/favicon.ico
 // @author       Merith-TK
